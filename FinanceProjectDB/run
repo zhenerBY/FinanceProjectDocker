@@ -1,0 +1,3 @@
+
+
+docker run --name apidb -p 5432:5432 -e POSTGRES_USER=postgress -e POSTGRES_PASSWORD=postgress -e POSTGRES_DB=financeproject -it --net=financenetwork postgres
