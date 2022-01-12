@@ -1,4 +1,4 @@
-import debug_toolbar
+# import debug_toolbar
 
 from django.contrib import admin
 from django.urls import path, include, re_path
@@ -30,5 +30,5 @@ urlpatterns = [
     path('api/', include('main.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('__debug__/', include(debug_toolbar.urls)),
+    # path('__debug__/', include(debug_toolbar.urls)),
 ]
