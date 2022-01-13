@@ -8,7 +8,7 @@ ENV DB_NAME=base
 
 ENV DB_USER=user
 
-ENV DDB_PASSWORD=password
+ENV DB_PASSWORD=password
 
 WORKDIR /app
 

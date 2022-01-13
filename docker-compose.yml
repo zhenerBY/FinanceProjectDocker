@@ -1,13 +1,5 @@
 version: '3.9'
 services:
-  bot:
-    build: FinanceProjectBot/
-#    depends_on:
-#      - api
-#      - apidb
-    links:
-      - apidb
-      - api
   apidb:
     image: postgres:14.1-alpine
     environment:
@@ -16,27 +8,24 @@ services:
       POSTGRES_DB: base
   api:
     build: FinanceProjectApi/
-    environment:
-      DB_HOST: apidb
-      DB_NAME: base
-      DB_USER: user
-      DB_PASSWORD: password
     ports:
       - 8000:8000
-    #    command: python manage.py runserver 0.0.0.0:8000
+#    command: python manage.py runserver 0.0.0.0:8000
+#    command: ["./wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+#    command: >
+#      sh -c "./wait-for-it.sh apidb:5432 &&
+#      python manage.py migrate &&
+#      python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" &&
+#      python manage.py runserver 0.0.0.0:8000"
     command: >
-      sh -c "python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
-    #    python manage.py runserver 0.0.0.0:8000
-    #      - python manage.py migrate
-    #      - python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')"
-    #      - gunicorn -b 0.0.0.0:8000 config.wsgi --log-file -
-    #      - python manage.py runserver 0.0.0.0:8000
-    #    depends_on:
-    #      - apidb
-    links:
+      sh -c "./wait-for-it.sh apidb:5432 &&
+      ./start.sh"
+    depends_on:
       - apidb
-  #    networks:
-  #      - finance-network
+  bot:
+    build: FinanceProjectBot/
+    depends_on:
+      - api
+      - apidb
 
 
