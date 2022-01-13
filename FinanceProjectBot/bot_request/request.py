@@ -8,7 +8,13 @@ load_dotenv()
 
 # !!!! Edit before deploy!!!!
 HOST_API = os.getenv("HOST_API")
-APIKEY = os.getenv("APIKEY")
+# 4 docker-compose
+if os.getenv("APIKEY") is not None:
+    APIKEY = os.getenv("APIKEY")
+else:
+    request = requests.get(HOST_API + 'apiusers/' + 'apikey/')
+    request = request.json()
+    APIKEY = request['apikey']
 
 
 # Примеры работы для бота

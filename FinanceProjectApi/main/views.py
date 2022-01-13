@@ -241,6 +241,13 @@ class ApiUsersViewSet(viewsets.ModelViewSet):
     serializer_class = ApiUsersSerializer
     permission_classes = [HasAPIKey]
 
+    def get_permissions(self):
+        if self.action == 'apikey':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [HasAPIKey]
+        return [permission() for permission in permission_classes]
+
     def get_queryset(self):
         queryset = super().get_queryset()
         if self.request.method in ('GET', 'DELETE', 'PUT', 'PATH'):
@@ -249,3 +256,15 @@ class ApiUsersViewSet(viewsets.ModelViewSet):
             except KeyError:
                 queryset = queryset
         return queryset
+
+    # return APIKEY (used only 4 docker-compose)
+    @action(methods=['GET'], detail=False, url_path="apikey")
+    def apikey(self, request):
+        with open('./key', 'r') as f:
+            apikey = f.read()
+        res_data = {
+            "apikey": apikey
+        }
+        with open('./key', 'w') as f:
+            f.write('None')
+        return Response(res_data, status=status.HTTP_200_OK)
