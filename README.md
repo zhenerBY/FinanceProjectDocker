@@ -10,7 +10,9 @@
 > git clone https://github.com/zhenerBY/FinanceProjectDocker.git .
 ### only for build on Linux *! required !*
 > chmod 777 ./FinanceProjectApi/wait-for-it.sh
+> 
 > chmod 777 ./FinanceProjectApi/start.sh
+> 
 > chmod 777 ./FinanceProjectBot/wait-for-it.sh
 ### run 
 > docker-compose up
