@@ -4,11 +4,11 @@
 ### Install Docker-Compose
 [Install Docker Compose](https://docs.docker.com/compose/install/)
 >
-### only for build on Windows **required!**
+### only for build on Windows *! required !*
 > git config --global core.autocrlf false
 ### clone project
 > git clone https://github.com/zhenerBY/FinanceProjectDocker.git .
-### only for build on Linux **required!**
+### only for build on Linux *! required !*
 > chmod 777 ./FinanceProjectApi/wait-for-it.sh
 > chmod 777 ./FinanceProjectApi/start.sh
 > chmod 777 ./FinanceProjectBot/wait-for-it.sh
