@@ -14,6 +14,8 @@
 > chmod 777 ./FinanceProjectApi/start.sh
 > 
 > chmod 777 ./FinanceProjectBot/wait-for-it.sh
+### set Bot Token
+- set BOT_TOKEN value in /FinanceProjectBot/Dockerfile
 ### run 
 > docker-compose up
 ## FinanceProjectApi
